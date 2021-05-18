@@ -7,14 +7,14 @@ speakersRouter.get('/', async (request, response) => {
       {
         $group: {
           _id: '$speaker',
-          firstLineId: {
-            $min: "$line_id"
-          },
+          // firstLineId: {
+          //   $min: "$line_id"
+          // },
         },
       },
       {
         $sort: {
-          firstLineId: 1
+          _id: 1
         },
       },
     ])

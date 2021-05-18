@@ -1,7 +1,7 @@
 const episodesRouter = require('express').Router()
 const Line = require('../models/lineModel')
 
-episodesRouter.get('/seasons/', async (request, response) => {
+episodesRouter.get('/seasons', async (request, response) => {
   const speakers = await Line
     .aggregate([
       {

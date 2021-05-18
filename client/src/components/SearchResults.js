@@ -16,7 +16,7 @@ const SearchResults = (props) => {
           switch (searchResults) {
             case ('No results.'):
               return <p>{searchResults}</p>
-            case ('Too many results!'):
+            case ('Too many results to display!'):
               return <p>{searchResults}</p>
             default:
               return <DisplayLines lines={searchResults} />
