@@ -1,0 +1,7 @@
+# server
+node_modules
+requests
+.DS_Store
+.env
+
+mongodb_import_cmd.txt
