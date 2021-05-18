@@ -22,11 +22,11 @@ speakersRouter.get('/', async (request, response) => {
   response.json(speakers)
 })
 
-speakersRouter.get('/:id', async (request, response) => {
+speakersRouter.get('/:speaker_name', async (request, response) => {
   const speaker = await Line
     .find({
       speaker:
-        { $regex: new RegExp('^' + request.params.id + '$', 'i') }
+        { $regex: new RegExp('^' + request.params.speaker_name + '$', 'i') }
     },
     // specify which fields to show
     {

@@ -8,7 +8,7 @@ const SearchForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    const searchResult = await lineService.getLine()
+    const searchResult = await lineService.getLine(searchQuery)
 
     console.log(searchQuery, searchResult)
   }
