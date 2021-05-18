@@ -12,8 +12,8 @@ const SearchResults = (props) => {
       {
         (() => {
           switch (searchResults) {
-            case (null):
-              return <p>No search query yet.</p>
+            case ('No results.'):
+              return <p>{searchResults}</p>
             case ('Too many results!'):
               return <p>{searchResults}</p>
             default:

@@ -20,8 +20,11 @@ linesRouter.get('/', async (request, response) => {
   const line = await Line
     .find({
       line_text: { 
-        $regex: new RegExp(request.query.searchQuery.toLowerCase(), 'i')
+        $regex: new RegExp(request.query.searchQuery, 'i')
       }
+    })
+    .sort({
+      line_id: 'ascending',
     })
   response.json(line)
 })

@@ -19,7 +19,9 @@ const SearchForm = (props) => {
 
     const results = await lineService.getLine(searchQuery)
 
-    if (results.length >= 1 && results.length <= 40) {
+    if (results.length <= 0) {
+      setSearchResults('No results.')
+    } else if (results.length >= 1 && results.length <= 100) {
       setSearchResults(results)
     } else {
       setSearchResults('Too many results!')
@@ -36,6 +38,7 @@ const SearchForm = (props) => {
         />
         <input
           type='submit'
+          value='Search'
         />
       </form>
     </div>
