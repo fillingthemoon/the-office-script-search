@@ -5,9 +5,12 @@ import NavBar from './components/NavBar'
 import SearchForm from './components/SearchForm'
 import SearchResults from './components/SearchResults'
 import Episodes from './components/Episodes'
+import Episode from './components/Episode'
 
 function App() {
   const [searchResults, setSearchResults] = useState('No results.')
+  const [seasonId, setSeasonId] = useState(null)
+  const [episodeId, setEpisodeId] = useState(null)
 
   return (
     <div>
@@ -23,7 +26,13 @@ function App() {
           />
         </Route>
         <Route path='/episodes'>
-          <Episodes />
+          <Episodes 
+            setSeasonId={setSeasonId}
+            setEpisodeId={setEpisodeId}
+          />
+        </Route>
+        <Route path='/seasons/:season_id/episodes/:episode_id/lines'>
+          <Episode seasonId={seasonId} episodeId={episodeId}/>
         </Route>
         <Route path='/'>
           <SearchForm

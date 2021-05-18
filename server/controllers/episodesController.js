@@ -113,6 +113,9 @@ episodesRouter.get('/seasons/:season_id/episodes/:episode_id/lines', async (requ
       season: Number(request.params.season_id),
       episode: Number(request.params.episode_id),
     })
+    .sort({
+      line_id: "ascending",
+    })
 
   response.json(episode)
 })

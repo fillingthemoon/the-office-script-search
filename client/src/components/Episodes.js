@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 import episodeService from '../services/episodeService'
 
-const Episodes = () => {
+const Episodes = (props) => {
   const [episodes, setEpisodes] = useState([])
+
+  const {
+    setSeasonId,
+    setEpisodeId
+  } = props
 
   const fetchData = async () => {
     const results = await episodeService.getEpisodes()
@@ -13,6 +19,11 @@ const Episodes = () => {
   useEffect(() => {
     fetchData()
   }, [])
+
+  const handleSelect = (seasonId, episodeId) => {
+    setSeasonId(seasonId)
+    setEpisodeId(episodeId)
+  }
 
   return (
     <div>
@@ -30,7 +41,15 @@ const Episodes = () => {
               <td>{season._id}</td>
               <td>
                 {season.lines.map((episode, j) =>
-                  <span key={j}>{j !== 0 && ', '}{episode._id}</span>
+                  <span key={j}>
+                    {j !== 0 && ', '}
+                    <Link
+                      to={`/seasons/${season._id}/episodes/${episode._id}/lines`}
+                      onClick={() => handleSelect(season._id, episode._id)}
+                    >
+                      {episode._id}
+                    </Link>
+                  </span>
                 )}
               </td>
             </tr>
