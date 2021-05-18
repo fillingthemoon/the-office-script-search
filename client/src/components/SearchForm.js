@@ -20,11 +20,11 @@ const SearchForm = (props) => {
     const results = await lineService.getLine(searchQuery)
 
     if (results.length <= 0) {
-      setSearchResults('No results.')
+      setSearchResults(0)
     } else if (results.length >= 1 && results.length <= 500) {
       setSearchResults(results)
     } else {
-      setSearchResults('Too many results!')
+      setSearchResults(1)
     }
   }
 

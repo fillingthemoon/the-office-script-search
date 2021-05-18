@@ -8,7 +8,7 @@ import Episodes from './components/Episodes'
 import Episode from './components/Episode'
 
 function App() {
-  const [searchResults, setSearchResults] = useState('No results.')
+  const [searchResults, setSearchResults] = useState(0)
   const [seasonId, setSeasonId] = useState(null)
   const [episodeId, setEpisodeId] = useState(null)
 
