@@ -21,11 +21,15 @@ const SearchForm = (props) => {
 
     if (results.length <= 0) {
       setSearchResults('No results.')
-    } else if (results.length >= 1 && results.length <= 100) {
+    } else if (results.length >= 1 && results.length <= 500) {
       setSearchResults(results)
     } else {
       setSearchResults('Too many results!')
     }
+  }
+
+  const searchInputStyle = {
+    width: '300px',
   }
 
   return (
@@ -33,8 +37,9 @@ const SearchForm = (props) => {
       <form onSubmit={handleSubmit}>
         <input
           type='text'
-          placeholder='Search here!'
+          placeholder='Search for any line from The Office here!'
           onChange={({ target }) => setSearchQuery(target.value)}
+          style={searchInputStyle}
         />
         <input
           type='submit'

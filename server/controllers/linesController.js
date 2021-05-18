@@ -17,6 +17,10 @@ linesRouter.get('/:line_id', async (request, response) => {
 })
 
 linesRouter.get('/', async (request, response) => {
+  if (request.query.searchQuery.length < 3) {
+    response.json({ error: 'too few characters in search query' })
+  }
+
   const line = await Line
     .find({
       line_text: { 
