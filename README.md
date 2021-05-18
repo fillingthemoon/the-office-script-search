@@ -1,5 +1,7 @@
 # The Office Script Search App
 
+## Try out the app [here](https://frozen-fortress-97960.herokuapp.com)!
+
 ## Acknowledgements
 - The Office lines dataset: https://www.kaggle.com/lillitarhea/the-office-script-lines
 
