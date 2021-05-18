@@ -17,7 +17,7 @@ function App() {
       <NavBar />
       <h1>The Office Script Search</h1>
       <Switch>
-        <Route path='/home'>
+        <Route path='/search'>
           <SearchForm
             setSearchResults={setSearchResults}
           />

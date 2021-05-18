@@ -6,8 +6,6 @@ const DisplayLines = (props) => {
     lines
   } = props
 
-  console.log(lines)
-
   return (
     <table>
       <thead>

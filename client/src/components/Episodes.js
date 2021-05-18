@@ -27,7 +27,7 @@ const Episodes = (props) => {
 
   return (
     <div>
-      <h2>All Seasons and Episodes!</h2>
+      <h2>All Episodes!</h2>
       <table>
         <thead>
           <tr>
