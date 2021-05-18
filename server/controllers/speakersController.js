@@ -12,14 +12,6 @@ speakersRouter.get('/', async (request, response) => {
           },
         },
       },
-      // {
-      //   $lookup: {
-      //     from: 'lines',
-      //     localField: '_id',
-      //     foreignField: 'speaker',
-      //     as: 'lines',
-      //   }
-      // },
       {
         $sort: {
           firstLineId: 1
@@ -35,6 +27,12 @@ speakersRouter.get('/:id', async (request, response) => {
     .find({
       speaker:
         { $regex: new RegExp('^' + request.params.id + '$', 'i') }
+    },
+    // specify which fields to show
+    {
+      season: 1,
+      episode: 1,
+      line_text: 1,
     })
 
   response.json(speaker)
