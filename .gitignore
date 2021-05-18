@@ -12,3 +12,5 @@ server/node_modules
 server/requests
 server/.DS_Store
 server/.env
+
+server/mongodb_import_cmd.txt
