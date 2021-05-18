@@ -2,15 +2,28 @@ import React, { useState } from 'react'
 
 import lineService from '../services/lineService'
 
-const SearchForm = () => {
+const SearchForm = (props) => {
   const [searchQuery, setSearchQuery] = useState('')
+
+  const {
+    setSearchResults
+  } = props
 
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    const searchResult = await lineService.getLine(searchQuery)
+    if (searchQuery.length < 3) {
+      window.alert('Query is too short!')
+      return
+    }
 
-    console.log(searchQuery, searchResult)
+    const results = await lineService.getLine(searchQuery)
+
+    if (results.length >= 1 && results.length <= 40) {
+      setSearchResults(results)
+    } else {
+      setSearchResults('Too many results!')
+    }
   }
 
   return (
