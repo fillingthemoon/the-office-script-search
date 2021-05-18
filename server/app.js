@@ -7,6 +7,7 @@ const cors = require('cors')
 // Routers
 const linesRouter = require('./controllers/linesController')
 const speakersRouter = require('./controllers/speakersController')
+const episodesRouter = require('./controllers/episodesController')
 
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
@@ -25,6 +26,7 @@ app.use(express.json())
 
 app.use('/api/lines', linesRouter)
 app.use('/api/speakers', speakersRouter)
+app.use('/api', episodesRouter)
 
 if (process.env.NODE_ENV === 'test') {
   const testingRouter = require('./controllers/testing')

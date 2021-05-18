@@ -1,42 +1,43 @@
 const speakersRouter = require('express').Router()
 const Line = require('../models/lineModel')
 
-const speakers = Line
-  .aggregate([
-    {
-      $group: {
-        _id: '$speaker'
-      },
-    },
-    {
-      $match: {
-        _id: 'Erin'
-      }
-    },
-    {
-      $lookup: {
-        from: 'lines',
-        localField: '_id',
-        foreignField: 'speaker',
-        as: 'lines',
-      }
-    },
-    {
-      $sort: {
-        _id: 1
-      },
-    },
-  ])
-
 speakersRouter.get('/', async (request, response) => {
-  const speakersAwaited = await speakers
+  const speakers = await Line
+    .aggregate([
+      {
+        $group: {
+          _id: '$speaker',
+          firstLineId: {
+            $min: "$line_id"
+          },
+        },
+      },
+      // {
+      //   $lookup: {
+      //     from: 'lines',
+      //     localField: '_id',
+      //     foreignField: 'speaker',
+      //     as: 'lines',
+      //   }
+      // },
+      {
+        $sort: {
+          firstLineId: 1
+        },
+      },
+    ])
 
-    response.json(speakersAwaited)
+  response.json(speakers)
 })
 
 speakersRouter.get('/:id', async (request, response) => {
-  const line = await Line.findById(request.params.id)
-  response.json(line)
+  const speaker = await Line
+    .find({
+      speaker:
+        { $regex: new RegExp('^' + request.params.id + '$', 'i') }
+    })
+
+  response.json(speaker)
 })
 
 module.exports = speakersRouter
