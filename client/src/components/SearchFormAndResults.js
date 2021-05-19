@@ -8,6 +8,8 @@ import { resetSeasonEpisodeScene } from '../reducers/seasonEpisodeSceneReducer'
 import { resetEpisodeLines } from '../reducers/episodeLinesReducer'
 import { resetSearchLines } from '../reducers/searchLinesReducer'
 
+import { Form, Input, Button } from 'antd'
+
 const SearchFormAndResults = () => {
   const [searchQuery, setSearchQuery] = useState('')
 
@@ -22,9 +24,7 @@ const SearchFormAndResults = () => {
     dispatch(resetSearchLines())
   }, [dispatch])
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-
+  const handleSubmit = () => {
     if (searchQuery.length < 3) {
       window.alert('The query is too short! Please enter at least 3 characters.')
       return
@@ -40,18 +40,21 @@ const SearchFormAndResults = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type='text'
-          placeholder='Search for any line from The Office here!'
-          onChange={({ target }) => setSearchQuery(target.value)}
-          style={searchInputStyle}
-        />
-        <input
-          type='submit'
-          value='Search'
-        />
-      </form>
+      <Form layout='inline' onFinish={handleSubmit}>
+        <Form.Item>
+          <Input
+            type='text'
+            placeholder='Search for any line from The Office here!'
+            onChange={({ target }) => setSearchQuery(target.value)}
+            style={searchInputStyle}
+          />
+        </Form.Item>
+        <Form.Item>
+          <Button type='primary' htmlType='submit'>
+            Search
+          </Button>
+        </Form.Item>
+      </Form>
 
       <h2>Search Results</h2>
       {
