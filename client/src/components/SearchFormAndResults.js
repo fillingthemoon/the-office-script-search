@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react'
 
+import DisplayLines from './DisplayLines'
 import lineService from '../services/lineService'
 
-const SearchForm = (props) => {
+const SearchFormAndResults = (props) => {
   const [searchQuery, setSearchQuery] = useState('')
+  const [searchResults, setSearchResults] = useState(0)
 
   const {
-    setSeasonEpisodeScene,
-    setSearchResults,
-    setLoading,
+    seasonEpisodeScene, setSeasonEpisodeScene,
+    loading, setLoading,
   } = props
 
   useEffect(() => {
@@ -54,8 +55,30 @@ const SearchForm = (props) => {
           value='Search'
         />
       </form>
+
+      <h2>Search Results</h2>
+      {
+        (() => {
+          switch (searchResults) {
+            case (0):
+              return (!loading && <p>No search query detected!</p>)
+            case (1):
+              return (!loading && <p>Sorry, we could not find any matches!</p>)
+            case (2):
+              return (!loading && <p>Sorry, too many results to display!</p>)
+            default:
+              return (
+                <DisplayLines
+                  seasonEpisodeScene={seasonEpisodeScene}
+                  setSeasonEpisodeScene={setSeasonEpisodeScene}
+                  lines={searchResults}
+                />
+              )
+          }
+        })()
+      }
     </div>
   )
 }
 
-export default SearchForm
+export default SearchFormAndResults

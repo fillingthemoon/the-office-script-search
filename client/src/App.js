@@ -4,8 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import NavBar from './components/NavBar'
-import SearchForm from './components/SearchForm'
-import SearchResults from './components/SearchResults'
+import SearchFormAndResults from './components/SearchFormAndResults'
 import Episodes from './components/Episodes'
 import Episode from './components/Episode'
 import Loading from './components/Loading'
@@ -22,16 +21,10 @@ function App() {
       <NavBar />
       <Switch>
         <Route exact path={['/search', '/']}>
-          <SearchForm
-            setSeasonEpisodeScene={setSeasonEpisodeScene}
-            setSearchResults={setSearchResults}
-            setLoading={setLoading}
-          />
-          <SearchResults
+          <SearchFormAndResults
             seasonEpisodeScene={seasonEpisodeScene}
             setSeasonEpisodeScene={setSeasonEpisodeScene}
-            searchResults={searchResults}
-            loading={loading}
+            loading={loading} setLoading={setLoading}
           />
         </Route>
         <Route exact path='/episodes'>
