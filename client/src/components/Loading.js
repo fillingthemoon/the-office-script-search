@@ -1,14 +1,14 @@
 import React from 'react'
 
-const Loading = (props) => {
+import { useSelector } from 'react-redux'
 
-  const {
-    loading
-  } = props
+const Loading = () => {
+
+  const loadingStatus = useSelector(state => state.loadingStatus)
 
   return (
     <div>
-      {loading
+      {loadingStatus
         ? <p>Loading, please wait...</p>
         : null
       }

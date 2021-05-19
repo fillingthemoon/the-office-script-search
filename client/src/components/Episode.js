@@ -1,47 +1,29 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
-import episodeService from '../services/episodeService'
 import DisplayLines from './DisplayLines'
 
-const Episode = (props) => {
-  const [episodeLines, setEpisodeLines] = useState([])
+import { getEpisodeLines } from '../reducers/episodeLinesReducer'
+import { resetSearchLines } from '../reducers/searchLinesReducer'
 
-  const {
-    seasonEpisodeScene,
-    setSeasonEpisodeScene,
-    setLoading,
-  } = props
+const Episode = () => {
+
+  const dispatch = useDispatch()
+  const seasonEpisodeScene = useSelector(state => state.seasonEpisodeScene)
 
   const [season, episode, scene] = seasonEpisodeScene
 
-  const fetchData = async () => {
-    try {
-      setLoading(true)
-      const results = await episodeService.getEpisode(season, episode)
-      setLoading(false)
-
-      setEpisodeLines(results)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
   useEffect(() => {
-    fetchData()
-  }, [])
+    dispatch(resetSearchLines())
+    dispatch(getEpisodeLines(season, episode))
+  }, [dispatch, season, episode])
 
   if (!season || !episode) {
     return <div>No season or episode selected.</div>
   }
 
   return (
-    <div>
-      <DisplayLines
-        seasonEpisodeScene={seasonEpisodeScene}
-        setSeasonEpisodeScene={setSeasonEpisodeScene}
-        lines={episodeLines}
-      />
-    </div>
+    <DisplayLines />
   )
 }
 

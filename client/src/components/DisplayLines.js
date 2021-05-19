@@ -1,15 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const DisplayLines = (props) => {
+import { useDispatch, useSelector } from 'react-redux'
 
-  const {
-    seasonEpisodeScene,
-    setSeasonEpisodeScene,
-    lines,
-  } = props
+import { setSeasonEpisodeScene } from '../reducers/seasonEpisodeSceneReducer'
+
+const DisplayLines = () => {
+  const dispatch = useDispatch()
+  const searchLines = useSelector(state => state.searchLines)
+  const episodeLines = useSelector(state => state.episodeLines)
+  const lines = searchLines ? searchLines : episodeLines
+
+  const seasonEpisodeScene = useSelector(state => state.seasonEpisodeScene)
 
   const [season, episode, scene] = seasonEpisodeScene
+
+  if (!lines) {
+    return <div></div>
+  }
 
   return (
     <div>
@@ -20,7 +28,7 @@ const DisplayLines = (props) => {
           <Link
             replace
             to={`/seasons/${season}/episodes/${episode}/lines`}
-            onClick={() => setSeasonEpisodeScene([season, episode, null])}
+            onClick={() => dispatch(setSeasonEpisodeScene([season, episode, null]))}
           >
             Episode {episode}
           </Link>
@@ -51,7 +59,7 @@ const DisplayLines = (props) => {
                     <Link
                       replace
                       to={`/seasons/${line.season}/episodes/${line.episode}/lines`}
-                      onClick={() => setSeasonEpisodeScene([line.season, line.episode, null])}
+                      onClick={() => dispatch(setSeasonEpisodeScene([line.season, line.episode, null]))}
                     >
                       {line.episode}
                     </Link>
@@ -62,7 +70,7 @@ const DisplayLines = (props) => {
                     <Link
                       replace
                       to={`/seasons/${line.season}/episodes/${line.episode}/scenes/${line.scene}/lines`}
-                      onClick={() => setSeasonEpisodeScene([line.season, line.episode, line.scene])}
+                      onClick={() => dispatch(setSeasonEpisodeScene([line.season, line.episode, line.scene]))}
                     >
                       {line.scene}
                     </Link>

@@ -1,7 +1,7 @@
 import axios from 'axios'
 const baseUrl = '/api/lines/'
 
-const getLine = (searchQuery) => {
+const getLines = (searchQuery) => {
   const request = axios.get(baseUrl,
     {
       params: {
@@ -12,7 +12,7 @@ const getLine = (searchQuery) => {
 }
 
 const lineService = {
-  getLine,
+  getLines,
 }
 
 export default lineService

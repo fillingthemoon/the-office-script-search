@@ -1,24 +1,38 @@
-import lineService from '../services/lineService'
-import episodeService from '../services/episodeService'
-
 const seasonEpisodeSceneReducer = (state = [null, null, null], action) => {
   switch (action.type) {
-    case 'INIT_BLOGS': {
-      return action.data.blogs
+    case 'RESET_SEASON_EPISODE_SCENE': {
+      return action.data.reset
+    }
+    case 'SET_SEASON_EPISODE_SCENE': {
+      return action.data.seasonEpisodeScene
+    }
+    default: {
+      return state
     }
   }
-  return state
 }
 
-export const initialiseBlogs = () => {
+export const resetSeasonEpisodeScene = () => {
   return async dispatch => {
 
-    // const blogs = await blogService.getAll()
+    const reset = [null, null, null]
 
     dispatch({
-      type: 'INIT_BLOGS',
+      type: 'RESET_SEASON_EPISODE_SCENE',
       data: {
-        // blogs,
+        reset
+      }
+    })
+  }
+}
+
+export const setSeasonEpisodeScene = (seasonEpisodeScene) => {
+  return async dispatch => {
+
+    dispatch({
+      type: 'SET_SEASON_EPISODE_SCENE',
+      data: {
+        seasonEpisodeScene
       }
     })
   }

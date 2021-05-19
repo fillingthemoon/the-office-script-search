@@ -1,7 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-
-import { useDispatch, useSelector } from 'react-redux'
 
 import NavBar from './components/NavBar'
 import SearchFormAndResults from './components/SearchFormAndResults'
@@ -10,25 +8,16 @@ import Episode from './components/Episode'
 import Loading from './components/Loading'
 
 function App() {
-  const [searchResults, setSearchResults] = useState(0)
-  const [loading, setLoading] = useState(false)
-  const [seasonEpisodeScene, setSeasonEpisodeScene] = useState([null, null, null])
-
-  // const seasonEpisodeScene = useSelector(state => state.seasonEpisodeScene)
 
   return (
     <div>
       <NavBar />
       <Switch>
         <Route exact path={['/search', '/']}>
-          <SearchFormAndResults
-            seasonEpisodeScene={seasonEpisodeScene}
-            setSeasonEpisodeScene={setSeasonEpisodeScene}
-            loading={loading} setLoading={setLoading}
-          />
+          <SearchFormAndResults />
         </Route>
         <Route exact path='/episodes'>
-          <Episodes setSeasonEpisodeScene={setSeasonEpisodeScene} />
+          <Episodes />
         </Route>
         <Route exact
           path={[
@@ -36,14 +25,10 @@ function App() {
             , '/seasons/:seasonId/episodes/:episodeId/scenes/:sceneId/lines'
           ]}
         >
-          <Episode
-            seasonEpisodeScene={seasonEpisodeScene}
-            setSeasonEpisodeScene={setSeasonEpisodeScene}
-            setLoading={setLoading}
-          />
+          <Episode />
         </Route>
       </Switch>
-      <Loading loading={loading} />
+      <Loading />
     </div>
   );
 }

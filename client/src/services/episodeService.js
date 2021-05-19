@@ -6,14 +6,14 @@ const getEpisodes = () => {
   return request.then(response => response.data)
 }
 
-const getEpisode = (seasonId, episodeId) => {
+const getEpisodeLines = (seasonId, episodeId) => {
   const request = axios.get(`${baseUrl}${seasonId}/episodes/${episodeId}/lines`)
   return request.then(response => response.data)
 }
 
 const episodeService = {
   getEpisodes,
-  getEpisode,
+  getEpisodeLines,
 }
 
 export default episodeService

@@ -1,11 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-const Episodes = (props) => {
+import { useDispatch } from 'react-redux'
 
-  const {
-    setSeasonEpisodeScene
-  } = props
+import { setSeasonEpisodeScene, resetSeasonEpisodeScene } from '../reducers/seasonEpisodeSceneReducer'
+import { resetEpisodeLines } from '../reducers/episodeLinesReducer'
+import { resetSearchLines } from '../reducers/searchLinesReducer'
+
+
+const Episodes = () => {
+  const dispatch = useDispatch()
+
+  // reset all
+  useEffect(() => {
+    dispatch(resetSeasonEpisodeScene())
+    dispatch(resetEpisodeLines())
+    dispatch(resetSearchLines())
+  }, [dispatch])
 
   const seasonsAndEpisodes = [
     { 'seasonId': 1, 'episodes': [1, 2, 3, 4, 5, 6] },
@@ -39,7 +50,7 @@ const Episodes = (props) => {
                     {j !== 0 && ', '}
                     <Link
                       to={`/seasons/${season.seasonId}/episodes/${episodeId}/lines`}
-                      onClick={() => setSeasonEpisodeScene([season.seasonId, episodeId, null])}
+                      onClick={() => dispatch(setSeasonEpisodeScene([season.seasonId, episodeId, null]))}
                     >
                       {episodeId}
                     </Link>
