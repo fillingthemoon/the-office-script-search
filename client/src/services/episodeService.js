@@ -6,8 +6,8 @@ const getEpisodes = () => {
   return request.then(response => response.data)
 }
 
-const getEpisode = (season_id, episode_id) => {
-  const request = axios.get(`${baseUrl}${season_id}/episodes/${episode_id}/lines`)
+const getEpisode = (seasonId, episodeId) => {
+  const request = axios.get(`${baseUrl}${seasonId}/episodes/${episodeId}/lines`)
   return request.then(response => response.data)
 }
 

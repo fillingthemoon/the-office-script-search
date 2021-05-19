@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 
 import episodeService from '../services/episodeService'
 
-import DisplayLines from './DisplayLines'
-
 const Episode = (props) => {
   const [episodeLines, setEpisodeLines] = useState([])
 
@@ -26,7 +24,28 @@ const Episode = (props) => {
 
   return (
     <div>
-      <DisplayLines lines={episodeLines} />
+      <h2>Season: {seasonId}</h2>
+      <h2>Episode: {episodeId}</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>line_id</th>
+            <th>scene</th>
+            <th>line_text</th>
+            <th>speaker</th>
+          </tr>
+        </thead>
+        <tbody>
+          {episodeLines.map((searchResult, i) =>
+            <tr key={i}>
+              <td>{searchResult.line_id}</td>
+              <td>{searchResult.scene}</td>
+              <td>{searchResult.line_text}</td>
+              <td>{searchResult.speaker}</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     </div>
   )
 }
