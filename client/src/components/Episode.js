@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 import episodeService from '../services/episodeService'
+import Loading from './Loading'
 
 const Episode = (props) => {
   const [episodeLines, setEpisodeLines] = useState([])
-  const [loading, setLoading] = useState(null)
 
   const {
-    seasonId, episodeId
+    seasonId, episodeId,
+    setSceneId,
+    loading, setLoading,
   } = props
 
   const fetchData = async () => {
     try {
-      setLoading('Loading, please wait...')
+      setLoading(true)
       const results = await episodeService.getEpisode(seasonId, episodeId)
-      setLoading(null)
+      setLoading(false)
       setEpisodeLines(results)
     } catch (error) {
       console.log(error)
@@ -26,7 +29,7 @@ const Episode = (props) => {
   }, [])
 
   if (!props.seasonId || !props.episodeId) {
-    return <div>No season or episode selected</div>
+    return <div>No season or episode selected.</div>
   }
 
   return (
@@ -45,14 +48,21 @@ const Episode = (props) => {
           {episodeLines.map((searchResult, i) =>
             <tr key={i}>
               <td>{searchResult.line_id}</td>
-              <td>{searchResult.scene}</td>
+              <td>
+                <Link
+                  to={`/seasons/${seasonId}/episodes/${episodeId}/${searchResult.scene}/lines`}
+                  onClick={() => setSceneId(searchResult.scene)}
+                >
+                  {searchResult.scene}
+                </Link>
+              </td>
               <td>{searchResult.line_text}</td>
               <td>{searchResult.speaker}</td>
             </tr>
           )}
         </tbody>
       </table>
-      {loading != null && <p>{loading}</p>}
+      <Loading loading={loading} />
     </div>
   )
 }
