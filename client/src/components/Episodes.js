@@ -42,14 +42,14 @@ const Episodes = (props) => {
             <tr key={i}>
               <td>{season.season_id}</td>
               <td>
-                {season.episodes.map((episode, j) =>
+                {season.episodes.map((episode_id, j) =>
                   <span key={j}>
                     {j !== 0 && ', '}
                     <Link
-                      to={`/seasons/${season.season_id}/episodes/${episode}/lines`}
-                      onClick={() => handleSelect(season.season_id, episode)}
+                      to={`/seasons/${season.season_id}/episodes/${episode_id}/lines`}
+                      onClick={() => handleSelect(season.season_id, episode_id)}
                     >
-                      {episode}
+                      {episode_id}
                     </Link>
                   </span>
                 )}
