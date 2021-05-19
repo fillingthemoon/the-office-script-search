@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import lineService from '../services/lineService'
 
@@ -6,8 +6,14 @@ const SearchForm = (props) => {
   const [searchQuery, setSearchQuery] = useState('')
 
   const {
-    setSearchResults
+    setSeasonEpisodeScene,
+    setSearchResults,
+    setLoading,
   } = props
+
+  useEffect(() => {
+    setSeasonEpisodeScene([null, null, null])
+  }, [setSeasonEpisodeScene])
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -17,7 +23,9 @@ const SearchForm = (props) => {
       return
     }
 
+    setLoading(true)
     const results = await lineService.getLine(searchQuery)
+    setLoading(false)
 
     if (results.length <= 0) {
       setSearchResults(0)

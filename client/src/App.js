@@ -6,14 +6,11 @@ import SearchForm from './components/SearchForm'
 import SearchResults from './components/SearchResults'
 import Episodes from './components/Episodes'
 import Episode from './components/Episode'
-import Scene from './components/Scene'
 
 function App() {
   const [searchResults, setSearchResults] = useState(0)
-  const [seasonId, setSeasonId] = useState(null)
-  const [episodeId, setEpisodeId] = useState(null)
-  const [sceneId, setSceneId] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [seasonEpisodeScene, setSeasonEpisodeScene] = useState([null, null, null])
 
   return (
     <div>
@@ -21,40 +18,37 @@ function App() {
       <Switch>
         <Route path='/search'>
           <SearchForm
+            setSeasonEpisodeScene={setSeasonEpisodeScene}
             setSearchResults={setSearchResults}
+            setLoading={setLoading}
           />
           <SearchResults
+            seasonEpisodeScene={seasonEpisodeScene}
+            setSeasonEpisodeScene={setSeasonEpisodeScene}
             searchResults={searchResults}
+            loading={loading}
           />
         </Route>
         <Route path='/episodes'>
-          <Episodes
-            setSeasonId={setSeasonId}
-            setEpisodeId={setEpisodeId}
-          />
+          <Episodes setSeasonEpisodeScene={setSeasonEpisodeScene} />
         </Route>
         <Route path='/seasons/:seasonId/episodes/:episodeId/lines'>
           <Episode
-            seasonId={seasonId} episodeId={episodeId} setSceneId={setSceneId}
+            seasonEpisodeScene={seasonEpisodeScene}
+            setSeasonEpisodeScene={setSeasonEpisodeScene}
             loading={loading} setLoading={setLoading}
           />
         </Route>
-        <Route path='/seasons/:seasonId/episodes/:episodeId/:sceneId/lines'>
-          <Scene
-            seasonId={seasonId} episodeId={episodeId} sceneId={sceneId}
+        <Route path='/seasons/:seasonId/episodes/:episodeId/scenes/:sceneId/lines'>
+          <Episode
+            seasonEpisodeScene={seasonEpisodeScene}
+            setSeasonEpisodeScene={setSeasonEpisodeScene}
             loading={loading} setLoading={setLoading}
           />
         </Route>
         <Route path='/'>
-          <SearchForm
-            setSearchResults={setSearchResults}
-          />
-          <SearchResults
-            searchResults={searchResults}
-          />
-        </Route>
-        <Route path='*'>
-          <h2>Error 404: Not Found</h2>
+          <SearchForm setSearchResults={setSearchResults} />
+          <SearchResults searchResults={searchResults} />
         </Route>
       </Switch>
     </div>

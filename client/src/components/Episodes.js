@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom'
 const Episodes = (props) => {
 
   const {
-    setSeasonId,
-    setEpisodeId
+    setSeasonEpisodeScene
   } = props
 
   const seasonsAndEpisodes = [
@@ -20,14 +19,9 @@ const Episodes = (props) => {
     { 'seasonId': 9, 'episodes': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23] },
   ]
 
-  const handleSelect = (seasonId, episodeId) => {
-    setSeasonId(seasonId)
-    setEpisodeId(episodeId)
-  }
-
   return (
     <div>
-      <h2>All Episodes!</h2>
+      <h2>All Episodes</h2>
       <table>
         <thead>
           <tr>
@@ -45,7 +39,7 @@ const Episodes = (props) => {
                     {j !== 0 && ', '}
                     <Link
                       to={`/seasons/${season.seasonId}/episodes/${episodeId}/lines`}
-                      onClick={() => handleSelect(season.seasonId, episodeId)}
+                      onClick={() => setSeasonEpisodeScene([season.seasonId, episodeId, null])}
                     >
                       {episodeId}
                     </Link>
