@@ -7,6 +7,7 @@
 
 ## Frontend (client)
 - React
+- Redux
 
 ## Backend (server)
 - Node

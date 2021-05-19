@@ -8,7 +8,6 @@ import { resetSeasonEpisodeScene } from '../reducers/seasonEpisodeSceneReducer'
 import { resetEpisodeLines } from '../reducers/episodeLinesReducer'
 import { resetSearchLines } from '../reducers/searchLinesReducer'
 
-
 const SearchFormAndResults = () => {
   const [searchQuery, setSearchQuery] = useState('')
 

@@ -7,7 +7,6 @@ import { setSeasonEpisodeScene, resetSeasonEpisodeScene } from '../reducers/seas
 import { resetEpisodeLines } from '../reducers/episodeLinesReducer'
 import { resetSearchLines } from '../reducers/searchLinesReducer'
 
-
 const Episodes = () => {
   const dispatch = useDispatch()
 
