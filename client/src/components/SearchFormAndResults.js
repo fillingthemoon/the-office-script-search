@@ -31,6 +31,7 @@ const SearchFormAndResults = () => {
       return
     }
 
+    dispatch(resetSearchLines())
     dispatch(getSearchLines(searchQuery))
   }
 
