@@ -8,6 +8,7 @@
 ## Frontend (client)
 - React
 - Redux
+- Ant Design
 
 ## Backend (server)
 - Node
