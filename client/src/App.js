@@ -16,7 +16,7 @@ function App() {
     <div>
       <NavBar />
       <Switch>
-        <Route path={['/search', '/']}>
+        <Route exact path={['/search', '/']}>
           <SearchForm
             setSeasonEpisodeScene={setSeasonEpisodeScene}
             setSearchResults={setSearchResults}
@@ -29,10 +29,10 @@ function App() {
             loading={loading}
           />
         </Route>
-        <Route path='/episodes'>
+        <Route exact path='/episodes'>
           <Episodes setSeasonEpisodeScene={setSeasonEpisodeScene} />
         </Route>
-        <Route
+        <Route exact
           path={[
             '/seasons/:seasonId/episodes/:episodeId/lines'
             , '/seasons/:seasonId/episodes/:episodeId/scenes/:sceneId/lines'
