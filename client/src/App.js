@@ -27,6 +27,7 @@ function App() {
             seasonEpisodeScene={seasonEpisodeScene}
             setSeasonEpisodeScene={setSeasonEpisodeScene}
             searchResults={searchResults}
+            loading={loading}
           />
         </Route>
         <Route exact path='/episodes'>

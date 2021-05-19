@@ -8,6 +8,7 @@ const SearchResults = (props) => {
     seasonEpisodeScene,
     setSeasonEpisodeScene,
     searchResults,
+    loading,
   } = props
 
   return (
@@ -17,9 +18,9 @@ const SearchResults = (props) => {
         (() => {
           switch (searchResults) {
             case (0):
-              return <p>No results.</p>
+              return (!loading && <p>No results.</p>)
             case (1):
-              return <p>Too many results to display!</p>
+              return (!loading && <p>Too many results to display!</p>)
             default:
               return (
                 <DisplayLines
