@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
+import { useDispatch, useSelector } from 'react-redux'
+
 import NavBar from './components/NavBar'
 import SearchForm from './components/SearchForm'
 import SearchResults from './components/SearchResults'
@@ -12,6 +14,8 @@ function App() {
   const [searchResults, setSearchResults] = useState(0)
   const [loading, setLoading] = useState(false)
   const [seasonEpisodeScene, setSeasonEpisodeScene] = useState([null, null, null])
+
+  // const seasonEpisodeScene = useSelector(state => state.seasonEpisodeScene)
 
   return (
     <div>
