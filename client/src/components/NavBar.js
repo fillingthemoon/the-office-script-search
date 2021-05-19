@@ -10,6 +10,7 @@ const NavBar = () => {
     float: 'left',
     fontSize: '1.2rem',
     fontWeight: 'bold',
+    marginRight: '50px',
   }
 
   return (

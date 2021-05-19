@@ -7,6 +7,13 @@ import { setSeasonEpisodeScene, resetSeasonEpisodeScene } from '../reducers/seas
 import { resetEpisodeLines } from '../reducers/episodeLinesReducer'
 import { resetSearchLines } from '../reducers/searchLinesReducer'
 
+import { Table, Button } from 'antd'
+
+const epBtnStyle = {
+  padding: '0',
+  width: '30px',
+  margin: '5px',
+}
 
 const Episodes = () => {
   const dispatch = useDispatch()
@@ -30,37 +37,45 @@ const Episodes = () => {
     { 'seasonId': 9, 'episodes': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23] },
   ]
 
+  const columns = [
+    {
+      title: 'Season',
+      dataIndex: 'seasonId',
+      name: 'seasonId',
+    },
+    {
+      title: 'Episodes',
+      dataIndex: 'episodes',
+      name: 'episodes',
+    },
+  ]
+
+  const dataSource = seasonsAndEpisodes
+    .map((season, i) => {
+      return {
+        key: i,
+        seasonId: season.seasonId,
+        episodes: (
+          season.episodes.map((episodeId, j) =>
+            <Link
+              key={j}
+              to={`/seasons/${season.seasonId}/episodes/${episodeId}/lines`}
+              onClick={() => dispatch(setSeasonEpisodeScene([season.seasonId, episodeId, null]))}
+            >
+              <Button style={epBtnStyle}>{episodeId}</Button>
+            </Link>
+          )
+        )
+      }
+    })
+
   return (
     <div>
       <h2>All Episodes</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>seasons</th>
-            <th>episodes</th>
-          </tr>
-        </thead>
-        <tbody>
-          {seasonsAndEpisodes.map((season, i) =>
-            <tr key={i}>
-              <td>{season.seasonId}</td>
-              <td>
-                {season.episodes.map((episodeId, j) =>
-                  <span key={j}>
-                    {j !== 0 && ', '}
-                    <Link
-                      to={`/seasons/${season.seasonId}/episodes/${episodeId}/lines`}
-                      onClick={() => dispatch(setSeasonEpisodeScene([season.seasonId, episodeId, null]))}
-                    >
-                      {episodeId}
-                    </Link>
-                  </span>
-                )}
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+      <Table
+        columns={columns} dataSource={dataSource}
+        pagination={false}
+      />
     </div>
   )
 }
