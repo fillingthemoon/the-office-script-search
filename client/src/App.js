@@ -16,7 +16,7 @@ function App() {
     <div>
       <NavBar />
       <Switch>
-        <Route path='/search'>
+        <Route path={['/search', '/']}>
           <SearchForm
             setSeasonEpisodeScene={setSeasonEpisodeScene}
             setSearchResults={setSearchResults}
@@ -32,23 +32,17 @@ function App() {
         <Route path='/episodes'>
           <Episodes setSeasonEpisodeScene={setSeasonEpisodeScene} />
         </Route>
-        <Route path='/seasons/:seasonId/episodes/:episodeId/lines'>
+        <Route
+          path={[
+            '/seasons/:seasonId/episodes/:episodeId/lines'
+            , '/seasons/:seasonId/episodes/:episodeId/scenes/:sceneId/lines'
+          ]}
+        >
           <Episode
             seasonEpisodeScene={seasonEpisodeScene}
             setSeasonEpisodeScene={setSeasonEpisodeScene}
             loading={loading} setLoading={setLoading}
           />
-        </Route>
-        <Route path='/seasons/:seasonId/episodes/:episodeId/scenes/:sceneId/lines'>
-          <Episode
-            seasonEpisodeScene={seasonEpisodeScene}
-            setSeasonEpisodeScene={setSeasonEpisodeScene}
-            loading={loading} setLoading={setLoading}
-          />
-        </Route>
-        <Route path='/'>
-          <SearchForm setSearchResults={setSearchResults} />
-          <SearchResults searchResults={searchResults} />
         </Route>
       </Switch>
     </div>
