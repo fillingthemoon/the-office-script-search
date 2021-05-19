@@ -18,9 +18,11 @@ const SearchResults = (props) => {
         (() => {
           switch (searchResults) {
             case (0):
-              return (!loading && <p>No results.</p>)
+              return (!loading && <p>No search query detected!</p>)
             case (1):
-              return (!loading && <p>Too many results to display!</p>)
+              return (!loading && <p>Sorry, we could not find any matches!</p>)
+            case (2):
+              return (!loading && <p>Sorry, too many results to display!</p>)
             default:
               return (
                 <DisplayLines

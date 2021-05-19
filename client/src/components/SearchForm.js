@@ -28,11 +28,11 @@ const SearchForm = (props) => {
     setLoading(false)
 
     if (results.length <= 0) {
-      setSearchResults(0)
+      setSearchResults(1)
     } else if (results.length >= 1 && results.length <= 500) {
       setSearchResults(results)
     } else {
-      setSearchResults(1)
+      setSearchResults(2)
     }
   }
 
