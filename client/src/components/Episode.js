@@ -9,7 +9,7 @@ const Episode = (props) => {
   const {
     seasonEpisodeScene,
     setSeasonEpisodeScene,
-    loading, setLoading,
+    setLoading,
   } = props
 
   const [season, episode, scene] = seasonEpisodeScene
@@ -40,7 +40,6 @@ const Episode = (props) => {
         seasonEpisodeScene={seasonEpisodeScene}
         setSeasonEpisodeScene={setSeasonEpisodeScene}
         lines={episodeLines}
-        loading={loading}
       />
     </div>
   )

@@ -6,6 +6,7 @@ import SearchForm from './components/SearchForm'
 import SearchResults from './components/SearchResults'
 import Episodes from './components/Episodes'
 import Episode from './components/Episode'
+import Loading from './components/Loading'
 
 function App() {
   const [searchResults, setSearchResults] = useState(0)
@@ -26,7 +27,6 @@ function App() {
             seasonEpisodeScene={seasonEpisodeScene}
             setSeasonEpisodeScene={setSeasonEpisodeScene}
             searchResults={searchResults}
-            loading={loading}
           />
         </Route>
         <Route exact path='/episodes'>
@@ -41,10 +41,11 @@ function App() {
           <Episode
             seasonEpisodeScene={seasonEpisodeScene}
             setSeasonEpisodeScene={setSeasonEpisodeScene}
-            loading={loading} setLoading={setLoading}
+            setLoading={setLoading}
           />
         </Route>
       </Switch>
+      <Loading loading={loading} />
     </div>
   );
 }

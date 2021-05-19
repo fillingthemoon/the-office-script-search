@@ -8,7 +8,6 @@ const SearchResults = (props) => {
     seasonEpisodeScene,
     setSeasonEpisodeScene,
     searchResults,
-    loading
   } = props
 
   return (
@@ -27,7 +26,6 @@ const SearchResults = (props) => {
                   seasonEpisodeScene={seasonEpisodeScene}
                   setSeasonEpisodeScene={setSeasonEpisodeScene}
                   lines={searchResults}
-                  loading={loading}
                 />
               )
           }
