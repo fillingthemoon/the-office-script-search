@@ -50,9 +50,9 @@ episodesRouter.get('/seasons', async (request, response) => {
   response.json(speakers)
 })
 
-episodesRouter.get('/seasons/:season_id/episodes', async (request, response) => {
+episodesRouter.get('/seasons/:seasonId/episodes', async (request, response) => {
   // get specific season
-  const season = Number(request.params.season_id)
+  const season = Number(request.params.seasonId)
 
   const speakers = await Line
     .aggregate([
@@ -107,11 +107,11 @@ episodesRouter.get('/seasons/:season_id/episodes', async (request, response) => 
   response.json(speakers)
 })
 
-episodesRouter.get('/seasons/:season_id/episodes/:episode_id/lines', async (request, response) => {
+episodesRouter.get('/seasons/:seasonId/episodes/:episodeId/lines', async (request, response) => {
   const episode = await Line
     .find({
-      season: Number(request.params.season_id),
-      episode: Number(request.params.episode_id),
+      season: Number(request.params.seasonId),
+      episode: Number(request.params.episodeId),
     })
     .sort({
       line_id: "ascending",

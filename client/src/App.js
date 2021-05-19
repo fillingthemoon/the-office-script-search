@@ -31,7 +31,7 @@ function App() {
             setEpisodeId={setEpisodeId}
           />
         </Route>
-        <Route path='/seasons/:season_id/episodes/:episode_id/lines'>
+        <Route path='/seasons/:seasonId/episodes/:episodeId/lines'>
           <Episode seasonId={seasonId} episodeId={episodeId}/>
         </Route>
         <Route path='/'>
@@ -41,6 +41,9 @@ function App() {
           <SearchResults
             searchResults={searchResults}
           />
+        </Route>
+        <Route path='*'>
+          <h2>Error 404: Not Found</h2>
         </Route>
       </Switch>
     </div>

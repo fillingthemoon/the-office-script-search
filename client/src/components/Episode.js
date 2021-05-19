@@ -4,14 +4,21 @@ import episodeService from '../services/episodeService'
 
 const Episode = (props) => {
   const [episodeLines, setEpisodeLines] = useState([])
+  const [loading, setLoading] = useState(null)
 
   const {
     seasonId, episodeId
   } = props
 
   const fetchData = async () => {
-    const results = await episodeService.getEpisode(seasonId, episodeId)
-    setEpisodeLines(results)
+    try {
+      setLoading('Loading, please wait...')
+      const results = await episodeService.getEpisode(seasonId, episodeId)
+      setLoading(null)
+      setEpisodeLines(results)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   useEffect(() => {
@@ -24,8 +31,7 @@ const Episode = (props) => {
 
   return (
     <div>
-      <h2>Season: {seasonId}</h2>
-      <h2>Episode: {episodeId}</h2>
+      <h2>{`Season: ${seasonId}, Episode: ${episodeId}`}</h2>
       <table>
         <thead>
           <tr>
@@ -46,6 +52,7 @@ const Episode = (props) => {
           )}
         </tbody>
       </table>
+      {loading != null && <p>{loading}</p>}
     </div>
   )
 }
