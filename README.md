@@ -10,6 +10,8 @@
 - React
 - Redux
 - Ant Design
+- Craco
+- Less
 
 ## Backend (server)
 - Node

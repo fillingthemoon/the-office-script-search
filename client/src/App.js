@@ -7,7 +7,7 @@ import Episodes from './components/Episodes'
 import Episode from './components/Episode'
 import Loading from './components/Loading'
 
-import './style.css'
+import './customTheme.less'
 
 import { Layout } from 'antd'
 const { Content } = Layout
