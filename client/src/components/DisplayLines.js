@@ -16,8 +16,9 @@ const DisplayLines = () => {
   const seasonEpisodeScene = useSelector(state => state.seasonEpisodeScene)
 
   const [season, episode, scene] = seasonEpisodeScene
+  const episodes = useSelector(state => state.episodes)
 
-  if (!lines) {
+  if (!lines || !season || !episode || !episodes) {
     return <div></div>
   }
 
@@ -104,7 +105,7 @@ const DisplayLines = () => {
             to={`/seasons/${season}/episodes/${episode}/lines`}
             onClick={() => dispatch(setSeasonEpisodeScene([season, episode, null]))}
           >
-            Episode {episode}
+            Episode {episode}: {episodes[season - 1].lines[episode - 1].episodeTitle}
           </Link>
         }
         {scene && ' - '}
