@@ -10,7 +10,10 @@ import { resetSearchLines } from '../reducers/searchLinesReducer'
 
 import { Form, Input, Button } from 'antd'
 
+import { useMediaQuery } from 'react-responsive'
+
 const SearchFormAndResults = () => {
+  const isBigScreen = useMediaQuery({ query: '(min-width: 830px)' })
   const [searchQuery, setSearchQuery] = useState('')
 
   const dispatch = useDispatch()
@@ -33,20 +36,25 @@ const SearchFormAndResults = () => {
   }
 
   const formStyle = {
-    display: 'flex',
-    alignItems: 'center',
     margin: '10px 0 40px 0',
   }
 
-  const searchInputStyle = {
-    width: '400px',
+  const searchBtnStyle = {
     fontSize: '1rem',
+    height: '35px',
+  }
+
+  const searchInputStyle = {
+    width: isBigScreen ? '400px' : '320px',
+    fontSize: '1rem',
+    height: '35px',
   }
 
   return (
     <div>
       <Form layout='inline' onFinish={handleSubmit} style={formStyle}>
-        <Form.Item>
+        <Form.Item
+          extra="E.g., 'dunder mifflin', 'fire guy', 'pretzel', 'hunter'">
           <Input
             type='text'
             placeholder='Search for any line from The Office here!'
@@ -58,7 +66,7 @@ const SearchFormAndResults = () => {
           <Button
             type='primary'
             htmlType='submit'
-            style={{ fontSize: '1rem' }}
+            style={searchBtnStyle}
           >
             Search
           </Button>
