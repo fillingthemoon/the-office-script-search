@@ -1,24 +1,21 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { setSeasonEpisodeScene, resetSeasonEpisodeScene } from '../reducers/seasonEpisodeSceneReducer'
 import { resetEpisodeLines } from '../reducers/episodeLinesReducer'
 import { resetSearchLines } from '../reducers/searchLinesReducer'
+import { getEpisodes } from '../reducers/episodesReducer'
 
 import {
-  Card, List, Button,
+  Card, List,
 } from 'antd'
-
-const epBtnStyle = {
-  padding: '0',
-  width: '30px',
-  margin: '5px',
-}
 
 const Episodes = () => {
   const dispatch = useDispatch()
+
+  const episodes = useSelector(state => state.episodes)
 
   // reset all
   useEffect(() => {
@@ -27,63 +24,41 @@ const Episodes = () => {
     dispatch(resetSearchLines())
   }, [dispatch])
 
-  const seasonsAndEpisodes = [
-    { 'seasonId': 1, 'episodes': [1, 2, 3, 4, 5, 6] },
-    { 'seasonId': 2, 'episodes': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22] },
-    { 'seasonId': 3, 'episodes': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23] },
-    { 'seasonId': 4, 'episodes': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] },
-    { 'seasonId': 5, 'episodes': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26] },
-    { 'seasonId': 6, 'episodes': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24] },
-    { 'seasonId': 7, 'episodes': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24] },
-    { 'seasonId': 8, 'episodes': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24] },
-    { 'seasonId': 9, 'episodes': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23] },
-  ]
-
-  // const columns = [
-  //   {
-  //     title: 'Season',
-  //     dataIndex: 'seasonId',
-  //     name: 'seasonId',
-  //   },
-  //   {
-  //     title: 'Episodes',
-  //     dataIndex: 'episodes',
-  //     name: 'episodes',
-  //   },
+  // const episodes = [
+  //   { 'seasonId': 1, 'episodes': [1, 2, 3, 4, 5, 6] },
+  //   { 'seasonId': 2, 'episodes': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22] },
+  //   { 'seasonId': 3, 'episodes': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23] },
+  //   { 'seasonId': 4, 'episodes': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] },
+  //   { 'seasonId': 5, 'episodes': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26] },
+  //   { 'seasonId': 6, 'episodes': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24] },
+  //   { 'seasonId': 7, 'episodes': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24] },
+  //   { 'seasonId': 8, 'episodes': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24] },
+  //   { 'seasonId': 9, 'episodes': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23] },
   // ]
 
-  // const dataSource = seasonsAndEpisodes
-  //   .map((season, i) => {
-  //     return {
-  //       key: i,
-  //       seasonId: season.seasonId,
-  //       episodes: (
-  //         season.episodes.map((episodeId, j) =>
-  //           <Link
-  //             key={j}
-  //             to={`/seasons/${season.seasonId}/episodes/${episodeId}/lines`}
-  //             onClick={() => dispatch(setSeasonEpisodeScene([season.seasonId, episodeId, null]))}
-  //           >
-  //             <Button style={epBtnStyle}>{episodeId}</Button>
-  //           </Link>
-  //         )
-  //       )
-  //     }
-  //   })
+  useEffect(() => {
+    dispatch(getEpisodes())
+  }, [])
 
-  const data = seasonsAndEpisodes
+  if (!episodes) {
+    return <div></div>
+  }
+
+  console.log(episodes)
+
+  const data = episodes
     .map((season) => {
       return {
-        title: `Season ${season.seasonId}`,
+        title: `Season ${season._id}`,
         episodes: (
-          season.episodes.map((episodeId, i) =>
+          season.lines.map((episode, i) =>
             <Link
               style={{ display: 'block' }}
               key={i}
-              to={`/seasons/${season.seasonId}/episodes/${episodeId}/lines`}
-              onClick={() => dispatch(setSeasonEpisodeScene([season.seasonId, episodeId, null]))}
+              to={`/seasons/${season._id}/episodes/${episode._id}/lines`}
+              onClick={() => dispatch(setSeasonEpisodeScene([season.seasonId, episode._id, null]))}
             >
-              <Button style={epBtnStyle}>{episodeId}</Button>
+              {`Ep. ${episode._id} - ${episode.episodeTitle}`}
             </Link>
           )
         )

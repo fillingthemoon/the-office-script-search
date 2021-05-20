@@ -35,7 +35,7 @@ const SearchFormAndResults = () => {
   }
 
   const formStyle = {
-    margin: '20px 0 40px 0',
+    margin: '10px 0 40px 0',
   }
 
   const searchInputStyle = {

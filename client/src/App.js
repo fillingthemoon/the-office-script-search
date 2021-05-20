@@ -18,7 +18,7 @@ const layoutStyle = {
 
 const layoutContentStyle = {
   background: '#ffffff',
-  padding: '40px 3% 40px 3%',
+  padding: '40px 7%'
 }
 
 function App() {

@@ -29,6 +29,9 @@ episodesRouter.get('/seasons', async (request, response) => {
               // group by episodes
               $group: {
                 _id: '$episode',
+                episodeTitle: {
+                  $first: '$title'
+                }
               }
             },
             {

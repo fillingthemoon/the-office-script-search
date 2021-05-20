@@ -1,5 +1,6 @@
 .DS_Store
 the_office_lines.csv
+backup_csvs
 
 # client
 client/node_modules
