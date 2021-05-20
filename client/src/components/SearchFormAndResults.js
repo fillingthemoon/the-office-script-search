@@ -33,11 +33,14 @@ const SearchFormAndResults = () => {
   }
 
   const formStyle = {
+    display: 'flex',
+    alignItems: 'center',
     margin: '10px 0 40px 0',
   }
 
   const searchInputStyle = {
-    width: '300px',
+    width: '400px',
+    fontSize: '1rem',
   }
 
   return (
@@ -52,7 +55,11 @@ const SearchFormAndResults = () => {
           />
         </Form.Item>
         <Form.Item>
-          <Button type='primary' htmlType='submit'>
+          <Button
+            type='primary'
+            htmlType='submit'
+            style={{ fontSize: '1rem' }}
+          >
             Search
           </Button>
         </Form.Item>

@@ -22,10 +22,6 @@ const NavBar = () => {
     border: 'none',
   }
 
-  const navBarLinkStyle = {
-    fontSize: isBigScreen ? '1.2rem' : '1rem',
-  }
-
   const logoStyle = {
     float: 'left',
     fontSize: isBigScreen ? '1.5rem' : '1.2rem',
@@ -39,10 +35,10 @@ const NavBar = () => {
       mode={orientation}
       style={navBarStyle}>
       <Menu.Item key='search'>
-        <Link replace to='/search' style={navBarLinkStyle}>Search</Link>
+        <Link replace to='/search' style={{ fontSize: '1rem' }}>Search</Link>
       </Menu.Item>
       <Menu.Item key='episodes'>
-        <Link replace to='/episodes' style={navBarLinkStyle}>All Episodes</Link>
+        <Link replace to='/episodes' style={{ fontSize: '1rem' }}>All Episodes</Link>
       </Menu.Item>
     </Menu >
   )
