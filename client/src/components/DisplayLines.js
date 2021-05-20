@@ -18,7 +18,7 @@ const DisplayLines = () => {
   const [season, episode, scene] = seasonEpisodeScene
   const episodes = useSelector(state => state.episodes)
 
-  if (!lines || !season || !episode || !episodes) {
+  if (!lines) {
     return <div></div>
   }
 
