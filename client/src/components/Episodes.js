@@ -66,7 +66,6 @@ const Episodes = () => {
 
   const dataSource = Object.keys(episodesReordered)
     .map((episodeId, i) => {
-      // console.log(episodesReordered[episodeId])
       const obj = { key: i + 1 }
       Object.keys(episodesReordered[episodeId])
         .map(seasonIdKey => { // Starts from 0!

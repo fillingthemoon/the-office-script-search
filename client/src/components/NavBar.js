@@ -31,7 +31,6 @@ const NavBar = () => {
 
   const menu = (orientation) => (
     <Menu
-      onClick={() => { console.log('hi') }}
       mode={orientation}
       style={navBarStyle}>
       <Menu.Item key='search'>
