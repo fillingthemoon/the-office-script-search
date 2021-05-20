@@ -6,6 +6,15 @@ const { Header } = Layout
 
 const NavBar = () => {
 
+  const headerStyle = {
+    background: '#ffffff',
+    margin: '20px',
+  }
+
+  const navBarStyle = {
+    border: 'none',
+  }
+
   const logoStyle = {
     float: 'left',
     fontSize: '1.2rem',
@@ -14,14 +23,14 @@ const NavBar = () => {
   }
 
   return (
-    <Header>
+    <Header style={headerStyle}>
       <span style={logoStyle}>The Office Script Search</span>
-      <Menu mode='horizontal'>
+      <Menu mode='horizontal' style={navBarStyle}>
         <Menu.Item key='search'>
           <Link replace to='/search'>Search</Link>
         </Menu.Item>
         <Menu.Item key='episodes'>
-          <Link replace to='/episodes'>Episodes</Link>
+          <Link replace to='/episodes'>All Episodes</Link>
         </Menu.Item>
       </Menu>
     </Header>

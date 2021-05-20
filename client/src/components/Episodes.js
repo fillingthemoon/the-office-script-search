@@ -7,7 +7,9 @@ import { setSeasonEpisodeScene, resetSeasonEpisodeScene } from '../reducers/seas
 import { resetEpisodeLines } from '../reducers/episodeLinesReducer'
 import { resetSearchLines } from '../reducers/searchLinesReducer'
 
-import { Table, Button } from 'antd'
+import {
+  Card, List, Button,
+} from 'antd'
 
 const epBtnStyle = {
   padding: '0',
@@ -37,28 +39,47 @@ const Episodes = () => {
     { 'seasonId': 9, 'episodes': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23] },
   ]
 
-  const columns = [
-    {
-      title: 'Season',
-      dataIndex: 'seasonId',
-      name: 'seasonId',
-    },
-    {
-      title: 'Episodes',
-      dataIndex: 'episodes',
-      name: 'episodes',
-    },
-  ]
+  // const columns = [
+  //   {
+  //     title: 'Season',
+  //     dataIndex: 'seasonId',
+  //     name: 'seasonId',
+  //   },
+  //   {
+  //     title: 'Episodes',
+  //     dataIndex: 'episodes',
+  //     name: 'episodes',
+  //   },
+  // ]
 
-  const dataSource = seasonsAndEpisodes
-    .map((season, i) => {
+  // const dataSource = seasonsAndEpisodes
+  //   .map((season, i) => {
+  //     return {
+  //       key: i,
+  //       seasonId: season.seasonId,
+  //       episodes: (
+  //         season.episodes.map((episodeId, j) =>
+  //           <Link
+  //             key={j}
+  //             to={`/seasons/${season.seasonId}/episodes/${episodeId}/lines`}
+  //             onClick={() => dispatch(setSeasonEpisodeScene([season.seasonId, episodeId, null]))}
+  //           >
+  //             <Button style={epBtnStyle}>{episodeId}</Button>
+  //           </Link>
+  //         )
+  //       )
+  //     }
+  //   })
+
+  const data = seasonsAndEpisodes
+    .map((season) => {
       return {
-        key: i,
-        seasonId: season.seasonId,
+        title: `Season ${season.seasonId}`,
         episodes: (
-          season.episodes.map((episodeId, j) =>
+          season.episodes.map((episodeId, i) =>
             <Link
-              key={j}
+              style={{ display: 'block' }}
+              key={i}
               to={`/seasons/${season.seasonId}/episodes/${episodeId}/lines`}
               onClick={() => dispatch(setSeasonEpisodeScene([season.seasonId, episodeId, null]))}
             >
@@ -69,13 +90,25 @@ const Episodes = () => {
       }
     })
 
+  const allEpisodes = () => {
+
+    return (
+      <List
+        grid={{ gutter: 16 }}
+        dataSource={data}
+        renderItem={item => (
+          <List.Item>
+            <Card title={item.title}>{item.episodes}</Card>
+          </List.Item>
+        )}
+      />
+    )
+  }
+
   return (
     <div>
       <h2>All Episodes</h2>
-      <Table
-        columns={columns} dataSource={dataSource}
-        pagination={false}
-      />
+      {allEpisodes()}
     </div>
   )
 }

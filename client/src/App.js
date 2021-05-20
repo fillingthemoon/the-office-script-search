@@ -12,12 +12,21 @@ import './style.css'
 import { Layout } from 'antd'
 const { Content } = Layout
 
+const layoutStyle = {
+  background: '#ffffff',
+}
+
+const layoutContentStyle = {
+  background: '#ffffff',
+  padding: '40px 3% 40px 3%',
+}
+
 function App() {
 
   return (
-    <Layout>
+    <Layout style={layoutStyle}>
       <NavBar />
-      <Content>
+      <Content style={layoutContentStyle}>
         <Switch>
           <Route exact path='/search'>
             <SearchFormAndResults />

@@ -51,6 +51,10 @@ const DisplayLines = () => {
       title: 'Character',
       dataIndex: 'speaker',
       name: 'speaker',
+      sorter: {
+        compare: (a, b) => a.speaker.localeCompare(b.speaker),
+        multiple: 1,
+      },
     },
   ]
 
@@ -109,6 +113,7 @@ const DisplayLines = () => {
       <Table
         columns={columns} dataSource={dataSource}
         pagination={false}
+        align='right'
       />
     </div>
   )

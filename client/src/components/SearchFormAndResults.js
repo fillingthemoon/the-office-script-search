@@ -34,13 +34,17 @@ const SearchFormAndResults = () => {
     dispatch(getSearchLines(searchQuery))
   }
 
+  const formStyle = {
+    margin: '20px 0 40px 0',
+  }
+
   const searchInputStyle = {
     width: '300px',
   }
 
   return (
     <div>
-      <Form layout='inline' onFinish={handleSubmit}>
+      <Form layout='inline' onFinish={handleSubmit} style={formStyle}>
         <Form.Item>
           <Input
             type='text'
