@@ -1,26 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
 
 import { setSeasonEpisodeScene } from '../reducers/seasonEpisodeSceneReducer'
 
-import { Table } from 'antd'
+import { Table, Alert } from 'antd'
 
 const DisplayLines = () => {
   const dispatch = useDispatch()
   const searchLines = useSelector(state => state.searchLines)
   const episodeLines = useSelector(state => state.episodeLines)
-  const lines = searchLines ? searchLines : episodeLines
+  const lines = searchLines || episodeLines || []
 
   const seasonEpisodeScene = useSelector(state => state.seasonEpisodeScene)
+  const loadingStatus = useSelector(state => state.loadingStatus)
 
   const [season, episode, scene] = seasonEpisodeScene
   const episodes = useSelector(state => state.episodes)
-
-  if (!lines) {
-    return <div></div>
-  }
 
   let columns = [
     {
@@ -94,28 +91,57 @@ const DisplayLines = () => {
       }
     })
 
+  const tableTitle = () => (
+    <h2>
+      {season && `Season ${season}`}
+      {episode && ' - '}
+      {episode &&
+        <Link
+          replace
+          to={`/seasons/${season}/episodes/${episode}/lines`}
+          onClick={() => dispatch(setSeasonEpisodeScene([season, episode, null]))}
+        >
+          Episode {episode}: {episodes[season - 1].lines[episode - 1].episodeTitle}
+        </Link>
+      }
+      {scene && ' - '}
+      {scene && `Scene ${scene}`}
+    </h2>
+  )
+
+  const errorMessage = (resultsMsg) => (
+    <div>
+      <Alert
+        type='error'
+        message={`Sorry, ${resultsMsg} results to display! Please try something else.`}
+        banner
+        closable
+      />
+      <Table
+        title={tableTitle}
+        columns={columns}
+      />
+    </div>
+  )
+
   return (
     <div>
-      <h2>
-        {season && `Season ${season}`}
-        {episode && ' - '}
-        {episode &&
-          <Link
-            replace
-            to={`/seasons/${season}/episodes/${episode}/lines`}
-            onClick={() => dispatch(setSeasonEpisodeScene([season, episode, null]))}
-          >
-            Episode {episode}: {episodes[season - 1].lines[episode - 1].episodeTitle}
-          </Link>
-        }
-        {scene && ' - '}
-        {scene && `Scene ${scene}`}
-      </h2>
-      <Table
-        columns={columns} dataSource={dataSource}
-        pagination={false}
-        align='right'
-      />
+      {
+        (searchLines && searchLines.length > 500
+          && errorMessage('too many')
+        )
+        ||
+        (searchLines && searchLines.length <= 0
+          && errorMessage('no')
+        )
+        ||
+        <Table
+          title={tableTitle}
+          columns={columns} dataSource={dataSource}
+          pagination={false}
+          loading={loadingStatus}
+        />
+      }
     </div>
   )
 }

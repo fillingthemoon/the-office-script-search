@@ -5,7 +5,6 @@ import NavBar from './components/NavBar'
 import SearchFormAndResults from './components/SearchFormAndResults'
 import Episodes from './components/Episodes'
 import Episode from './components/Episode'
-import Loading from './components/Loading'
 
 import './customTheme.less'
 
@@ -46,7 +45,6 @@ function App() {
             <Episode />
           </Route>
         </Switch>
-        <Loading />
       </Content>
     </Layout>
   )

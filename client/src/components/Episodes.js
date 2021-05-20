@@ -16,6 +16,7 @@ const Episodes = () => {
   const dispatch = useDispatch()
 
   const episodes = useSelector(state => state.episodes)
+  const loadingStatus = useSelector(state => state.loadingStatus)
 
   // reset all
   useEffect(() => {
@@ -84,12 +85,17 @@ const Episodes = () => {
       return obj
     })
 
+  const tableTitle = () => (
+    <h2>All Episodes</h2>
+  )
+
   return (
     <div>
-      <h2>All Episodes</h2>
       <Table
+        title={tableTitle}
         columns={columns} dataSource={dataSource}
         pagination={false}
+        loading={loadingStatus}
       />
     </div>
   )

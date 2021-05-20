@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import DisplayLines from './DisplayLines'
@@ -19,7 +20,7 @@ const Episode = () => {
   }, [dispatch, season, episode])
 
   if (!season || !episode) {
-    return <div>No season or episode selected.</div>
+    return <Redirect to='/episodes' />
   }
 
   return (

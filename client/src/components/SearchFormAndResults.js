@@ -14,8 +14,6 @@ const SearchFormAndResults = () => {
   const [searchQuery, setSearchQuery] = useState('')
 
   const dispatch = useDispatch()
-  const lines = useSelector(state => state.searchLines)
-  const loadingStatus = useSelector(state => state.loadingStatus)
 
   // reset all
   useEffect(() => {
@@ -59,21 +57,7 @@ const SearchFormAndResults = () => {
           </Button>
         </Form.Item>
       </Form>
-
-      <h2>Search Results</h2>
-      {
-        (() => {
-          if (lines === null) {
-            return (!loadingStatus && <p>No search query detected!</p>)
-          } else if (lines.length === 0) {
-            return (!loadingStatus && <p>Sorry, we could not find any matches!</p>)
-          } else if (lines.length > 500) {
-            return (!loadingStatus && <p>Sorry, too many results to display!</p>)
-          } else {
-            return <DisplayLines />
-          }
-        })()
-      }
+      <DisplayLines />
     </div>
   )
 }
