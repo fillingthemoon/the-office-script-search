@@ -1,11 +1,49 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
 
 import { setSeasonEpisodeScene } from '../reducers/seasonEpisodeSceneReducer'
+import { getEpisodes } from '../reducers/episodesReducer'
 
 import { Table, Alert } from 'antd'
+
+let columns = [
+  {
+    title: 'Line Id',
+    dataIndex: 'line_id',
+    name: 'line_id',
+  },
+  {
+    title: 'Season',
+    dataIndex: 'season',
+    name: 'season',
+  },
+  {
+    title: 'Episode',
+    dataIndex: 'episode',
+    name: 'episode',
+  },
+  {
+    title: 'Scene',
+    dataIndex: 'scene',
+    name: 'scene',
+  },
+  {
+    title: 'Line',
+    dataIndex: 'line_text',
+    name: 'line_text',
+  },
+  {
+    title: 'Character',
+    dataIndex: 'speaker',
+    name: 'speaker',
+    sorter: {
+      compare: (a, b) => a.speaker.localeCompare(b.speaker),
+      multiple: 1,
+    },
+  },
+]
 
 const DisplayLines = () => {
   const dispatch = useDispatch()
@@ -19,42 +57,9 @@ const DisplayLines = () => {
   const [season, episode, scene] = seasonEpisodeScene
   const episodes = useSelector(state => state.episodes)
 
-  let columns = [
-    {
-      title: 'Line Id',
-      dataIndex: 'line_id',
-      name: 'line_id',
-    },
-    {
-      title: 'Season',
-      dataIndex: 'season',
-      name: 'season',
-    },
-    {
-      title: 'Episode',
-      dataIndex: 'episode',
-      name: 'episode',
-    },
-    {
-      title: 'Scene',
-      dataIndex: 'scene',
-      name: 'scene',
-    },
-    {
-      title: 'Line',
-      dataIndex: 'line_text',
-      name: 'line_text',
-    },
-    {
-      title: 'Character',
-      dataIndex: 'speaker',
-      name: 'speaker',
-      sorter: {
-        compare: (a, b) => a.speaker.localeCompare(b.speaker),
-        multiple: 1,
-      },
-    },
-  ]
+  useEffect(() => {
+    dispatch(getEpisodes())
+  }, [])
 
   // Conditionally render the season, episode, and scene columns
   columns = columns.filter(col => !season ? true : col.name !== 'season')
