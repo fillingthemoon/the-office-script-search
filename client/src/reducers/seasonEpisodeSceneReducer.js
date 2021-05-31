@@ -29,6 +29,9 @@ export const resetSeasonEpisodeScene = () => {
 export const setSeasonEpisodeScene = (seasonEpisodeScene) => {
   return async dispatch => {
 
+    seasonEpisodeScene = seasonEpisodeScene
+      .map(ses => ses !== null ? Number(ses) : null)
+
     dispatch({
       type: 'SET_SEASON_EPISODE_SCENE',
       data: {

@@ -8,7 +8,7 @@ import { getEpisodes } from '../reducers/episodesReducer'
 
 import { Table, Alert } from 'antd'
 
-let columns = [
+let allColumns = [
   {
     title: 'Line Id',
     dataIndex: 'line_id',
@@ -62,7 +62,7 @@ const DisplayLines = () => {
   }, [])
 
   // Conditionally render the season, episode, and scene columns
-  columns = columns.filter(col => !season ? true : col.name !== 'season')
+  const columns = allColumns.filter(col => !season ? true : col.name !== 'season')
     .filter(col => !episode ? true : col.name !== 'episode')
     .filter(col => !scene ? true : col.name !== 'scene')
 
